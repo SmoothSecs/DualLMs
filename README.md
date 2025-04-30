@@ -22,6 +22,9 @@ DualLM helps downstream maintainers and security teams prioritize critical patch
 ## Environment
 We use conda to manage the running environemnt, please see https://anaconda.org/anaconda/conda for details to install conda.
 
+## Dependencies
+
+DualLM relies on Joern(https://github.com/joernio/joern) for the slicing.  A jern.zip has been uploaded to the root folder of DualLMs. please unzip it and keep it under DualLMs root.
 
 ## Models
 
