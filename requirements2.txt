@@ -1,0 +1,7 @@
+acrebleu==1.5.1
+fairseq
+apex
+sentencepiece
+tree_sitter==0.2.1
+bs4
+diskcache
