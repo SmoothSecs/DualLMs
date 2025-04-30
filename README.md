@@ -28,7 +28,7 @@ DualLM relies on Joern(https://github.com/joernio/joern) for the slicing.  A jer
 
 ## Models
 
-The models are stored under PROJECT_FOLDER/modles.  just download them and keep them there.
+The models are stored under PROJECT_FOLDER/models.  just download them and keep them there.
 
 ## API Keys
 
