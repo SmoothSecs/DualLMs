@@ -14,11 +14,12 @@ def main():
     parser.add_argument('--summary-file', type=str, required=True, help='Path to the summary file')
     parser.add_argument('--data-dir', type=str, required=True, help='Path to the data directory')
 
+
     # Parse arguments
     args = parser.parse_args()
 
     # Query the LLM with the commits
-    #llm_query.llm_query(args.commits, args.out_file1, args.out_file2)
+    llm_query.llm_query(args.commits, args.out_file1, args.out_file2)
    
     
     
@@ -35,7 +36,11 @@ def main():
     llm_query.get_summaries(not_reliable, args.summary_file)
     
     preprocess.build_eval_data_for_random_given(args.name,not_reliable, args.summary_file, args.data_dir) 
-  
+    #out_str=get_results.parse_sliceLM_results(not_reliable, "./data/results/step1_res.txt", "./data/results/step2_res.txt") 
+    #print("FInal results:", out_str)
+
+
+
 if __name__ == "__main__":
     main()
     

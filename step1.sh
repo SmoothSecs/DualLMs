@@ -5,7 +5,7 @@
 
 
 # Set up environment variables
-#export OPENAI_API_KEY="your-openai-api-key-here"
+export OPENAI_API_KEY="your-openai-api-key-here"
 
 
 # Example commits (these are example commit hashes, replace with real ones)
