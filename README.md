@@ -51,6 +51,7 @@ clone Linux repo into ./repos/. so the system can fetch the commits information 
 ```
 ### install the depedencies
 ```
+conda install -c conda-forge openjdk=21
 pip3 install -r requirements.txt
 ```
 ### run the script.

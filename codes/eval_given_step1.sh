@@ -3,7 +3,7 @@
 CURRENT_DIR=$(pwd)
 HOME_DIR=$(realpath ../)
 DATA_HOME=${HOME_DIR}/data
-MODEL_HOME="../models"
+MODEL_HOME=${HOME_DIR}/models/
 
 #
  

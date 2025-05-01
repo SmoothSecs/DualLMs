@@ -18,7 +18,7 @@ import time
 import glob
 
 cwd = os.path.dirname(os.path.realpath(__file__))
-PROJECT_DIR = str(Path(cwd).parent.parent.absolute())
+PROJECT_DIR = str(Path(cwd).parent.absolute())
 linux_dir = str(Path(cwd).parent.absolute()) + "/repos/linux"
 HOME_DIR = str(Path(cwd).parent.absolute())
 
@@ -743,7 +743,7 @@ def spm_process(sets, set_dir, spm_dir, SPMMODEL,sample_limit):
         out_file = spm_dir+ split+".spm"
         lines = helper.readFile(src_file)
         helper.delFileIfExists(out_file)
-        cmd = "python encode.py --model-file "+SPMMODEL+" --inputs "+src_file +" --outputs  "+out_file+" --max_len "+str(max_len)+" --workers 60"
+        cmd = "python "+ PROJECT_DIR +"/codes/encode.py --model-file "+SPMMODEL+" --inputs "+src_file +" --outputs  "+out_file+" --max_len "+str(max_len)+" --workers 60"
         print(cmd)
         res,out = helper.run_cmd_return_status1(cmd)
         if res != 0:

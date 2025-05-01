@@ -215,13 +215,14 @@ def joern_slice(commit):
             file_path1 = file_path.replace("/","$")
             depends_edges_path = depends_edges+commit+"/"+out_dirs[index]+"/"+file_path1
             # slices_out_path = slices_out+commit+"/"+out_dirs[index]+"/"+file_path1
-            
+        
             cpg_out = work_dir+"cpg.bin"
             ret = os.system(f'rm -rf {cpg_out}')
             if ret != 0:
                 print(f"{commit} {index} {file_path} joern cpg remove failed before parsing!")
     
-            ret = os.system(f'sh {joern_parse_path} {temp_c} -o {cpg_out} >/dev/null 2>&1')
+            #ret = os.system(f'sh {joern_parse_path} {temp_c} -o {cpg_out} >/dev/null 2>&1')
+            ret = os.system(f'sh {joern_parse_path} {temp_c} -o {cpg_out} > /tmp/joern_parse.log 2>&1')
             if ret != 0:
                 print(f'sh {joern_parse_path} {temp_c} -o {cpg_out} >/dev/null 2>&1')
                 print(f"{commit} {index} {file_path} joern parsing failed!")
