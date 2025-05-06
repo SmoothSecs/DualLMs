@@ -13,7 +13,7 @@ def main():
     parser.add_argument('--repo-dir', type=str, required=True, help='Path to the repository directory')
     parser.add_argument('--summary-file', type=str, required=True, help='Path to the summary file')
     parser.add_argument('--data-dir', type=str, required=True, help='Path to the data directory')
-
+    parser.add_argument('--not-reliable', type=str, required=True, help='Out file of not_reliable commits.')
 
     # Parse arguments
     args = parser.parse_args()
@@ -31,13 +31,16 @@ def main():
     print("out_str")
     print(out_str)
     
+    # Write not_reliable to the specified file
+    with open(args.not_reliable, "w") as f:
+        for item in not_reliable:
+            f.write(str(item) + "\n")
     
     # Get the summaries from the LLM
     llm_query.get_summaries(not_reliable, args.summary_file)
     
     preprocess.build_eval_data_for_random_given(args.name,not_reliable, args.summary_file, args.data_dir) 
-    #out_str=get_results.parse_sliceLM_results(not_reliable, "./data/results/step1_res.txt", "./data/results/step2_res.txt") 
-    #print("FInal results:", out_str)
+  
 
 
 

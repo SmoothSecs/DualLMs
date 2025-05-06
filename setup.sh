@@ -10,6 +10,7 @@ pip3 install -r requirements.txt
 
 conda deactivate
 #setup the environment for running the step 2 part.
+
 conda create --name dl_step2 python=3.6.10
 conda activate dl_step2
 #install the dependencies

@@ -484,8 +484,6 @@ def parse_sliceLM_results(not_reliable,res_file1,res_file2):
 
     out_str=""
     eval_preds = {line.split("\t")[2]:line.split("\t")[0] for line in helper.readFile(res_file1) if "[" in line and  "\t" in line}
- 
-    print("\n\n---\n\n")
     eval_preds1 = {line.split("\t")[2]:line.split("\t")[0] for line in helper.readFile(res_file2) if "[" in line and  "\t" in line}
     for commit in not_reliable:
         if eval_preds1[commit] == "1":
@@ -497,4 +495,5 @@ def parse_sliceLM_results(not_reliable,res_file1,res_file2):
                 out_str+=commit+" : OTHER\n"
         else:
             out_str+=commit+" : OTHER\n"
+    return out_str
                 
