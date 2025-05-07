@@ -18,7 +18,7 @@ def main():
   
 
     out_str=get_results.parse_sliceLM_results(args.not_reliable, args.step1_out_file, args.step2_out_file) 
-    print("Final results:", out_str)
+    print("Final results:\n", out_str)
 
 
 

@@ -80,16 +80,16 @@ def main():
         for k, v in stats.most_common():
             print("[{}] filtered {} lines".format(k, v), file=sys.stderr)
         token_lens = np.array(token_lens)
-        print("# of samples: ", len(token_lens))
+        #print("# of samples: ", len(token_lens))
         percentile= percentileofscore(token_lens, int(args.max_len))
-        print(" {}% of samples are smaller than {} tokens".format(percentile,args.max_len))
-        print(" mean token length: {}".format(np.mean(token_lens)))
-        print(" middle token length: {}".format(np.median(token_lens)))
-        print(" 0%% token length: {}".format(np.percentile(token_lens,0)))
-        print(" 25%% token length: {}".format(np.percentile(token_lens,25)))
-        print(" 50%% token length: {}".format(np.percentile(token_lens,50)))
-        print(" 75%% token length: {}".format(np.percentile(token_lens,75)))
-        print(" 100%% token length: {}".format(np.percentile(token_lens,100)))
+        #print(" {}% of samples are smaller than {} tokens".format(percentile,args.max_len))
+        #print(" mean token length: {}".format(np.mean(token_lens)))
+        #print(" middle token length: {}".format(np.median(token_lens)))
+        #print(" 0%% token length: {}".format(np.percentile(token_lens,0)))
+        #print(" 25%% token length: {}".format(np.percentile(token_lens,25)))
+        #print(" 50%% token length: {}".format(np.percentile(token_lens,50)))
+        #print(" 75%% token length: {}".format(np.percentile(token_lens,75)))
+        #print(" 100%% token length: {}".format(np.percentile(token_lens,100)))
 
 class MultiprocessingEncoder(object):
 

@@ -203,10 +203,7 @@ def joern_slice(commit):
         for file_path in file_paths:
             if file_path not in file_linenum:
                 continue
-            print("REPO DIR: ",repo_dir)
-            print("cd "+repo_dir+";git show "+commit+status_symbols[index]+":"+file_path+" > "+temp_c)
             ret = os.system("cd "+repo_dir+";git show "+commit+status_symbols[index]+":"+file_path+" > "+temp_c)
-            print("ret: ",ret)
             if ret != 0:
                 print(f"{commit} {index} {file_path} git show failed!")
                 shutil.rmtree(work_dir, ignore_errors=True)
@@ -704,7 +701,7 @@ def direct_ddg_thread(commit):
             forward_path = ddgs_out_path + "/forward"
             helper.delFileIfExists(backward_path)
             helper.delFileIfExists(forward_path)
-            print(commit, line_nums)
+            #print(commit, line_nums)
             for line_num in backwards:
                 if line_num not in line_nums:
                     helper.dump(backward_path,str(line_num)+"\n")

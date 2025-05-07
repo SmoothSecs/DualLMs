@@ -474,7 +474,6 @@ def parse_llm_results(src_file):
     out_str = ""
     for commit in reliable:
         out_str += commit + " : " + llm_conclusion[commit] + "\n"
-    print("OUT" +out_str)
     return not_reliable, out_str
     
  #not_reliable: commits to be processed by SliceLM

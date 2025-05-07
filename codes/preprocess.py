@@ -37,7 +37,6 @@ def get_startlinenum(line, chosen_symbol,ignore_symbol):
 def line_num_patch(commit, chosen_symbol, ignore_symbol):
  
     cmd = "cd "+repo_dir+";git show "+commit
-    print(cmd)
     # cmd = "cd "+linux_dir+";git diff --unified=0 --diff-filter=M "+commit+"^ "+commit
     result = helper.command(cmd)
     contents_start = False
@@ -72,13 +71,13 @@ def line_num_patch(commit, chosen_symbol, ignore_symbol):
             if chosen_symbol == "-":
                 if "diff --cc " in line:
                     file_path = line.split("diff --cc ")[1].strip("\n")
-                    print(f"{commit} has diff -cc")
+                    #print(f"{commit} has diff -cc")
                 else:
                     file_path = line.split("--git a/")[1].split(" b/")[0]
                 # print(f"{file_path} {file}")
             else:
                 if "diff --cc " in line:
-                    print(f"{commit} has diff -cc")
+                    #print(f"{commit} has diff -cc")
                     file_path = line.split("diff --cc ")[1].strip("\n")
                 else:
                     file_path = line.split(" b/")[1].strip("\n")
@@ -159,7 +158,7 @@ def single_thread(commit):
         lines =[None]*3
         # print(commit)
         file_linenum,filename_path = line_num_patch(commit, symbols[i], symbols[1-i])
-        print(commit,file_linenum)
+        #print(commit,file_linenum)
         if file_linenum != {}:
             counters[i] += 1
         
@@ -169,7 +168,7 @@ def single_thread(commit):
             patch_lines = []
             cmd = "cd "+repo_dir+";git show "+commit+commit_status_symbols[i]+":"+patch_file_name
             file_lines1 = helper.command(cmd)
-            print(commit,file_lines1)
+            #print(commit,file_lines1)
             file_lines = []
             for line in file_lines1:
                 file_lines.append(line.replace("\t","").strip("\n"))
@@ -415,11 +414,11 @@ def gen_slicing_diff1(statuses, raw_data_dir,slicing_diff_dir):
     for index in range(len(statuses)):
         status = statuses[index]
         out_dir = raw_data_dir + status + "/"
-        print(out_dir)
+        #print(out_dir)
         for commit in os.listdir(out_dir):
             commits.append(commit)
     commits = [*set(commits)]
-    print("commits: "+str(len(commits)))
+    #print("commits: "+str(len(commits)))
 
     with multiprocessing.Pool(60) as pool:
         count = 0
@@ -731,7 +730,7 @@ def train_spm(set_dir,sets,sentencepiece_dir,SPMVOCAB,DICT_FILE):
     print("\n\n\n DICT GENERATION DONE! \n\n\n")        
 
 def spm_process(sets, set_dir, spm_dir, SPMMODEL,sample_limit):
-    print(sample_limit)
+    #print(sample_limit)
     if sample_limit == "long":
         max_len = 2040
     if sample_limit == "medium":
@@ -744,7 +743,7 @@ def spm_process(sets, set_dir, spm_dir, SPMMODEL,sample_limit):
         lines = helper.readFile(src_file)
         helper.delFileIfExists(out_file)
         cmd = "python "+ PROJECT_DIR +"/codes/encode.py --model-file "+SPMMODEL+" --inputs "+src_file +" --outputs  "+out_file+" --max_len "+str(max_len)+" --workers 60"
-        print(cmd)
+        #print(cmd)
         res,out = helper.run_cmd_return_status1(cmd)
         if res != 0:
             print("spm preprocess failed")

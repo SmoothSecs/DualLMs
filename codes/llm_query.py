@@ -230,7 +230,7 @@ def bug_type_by_slicing():
             passed_to_gpt += 1
             message = [{"role": "user", "content": prompt},]#{"role": "user", "content": "do the commit title and message contain the indications or implications of a security bug? please answer in the format of \"yes\" or \"no\"."}
             res = gpt4(message,0.7)
-            print(res)
+            #print(res)
             result[commit] = res
             if "Bug type: " in res:
                 bug_type = res.split("Bug type: ")[1].split("\n")[0]
@@ -240,7 +240,7 @@ def bug_type_by_slicing():
      
         helper.del_file_if_exists(out_file)
         helper.dump(out_file, str(result))
-        print("passed_to_gpt/total: "+str(passed_to_gpt)+"/"+str(len(todos)))
+        #print("passed_to_gpt/total: "+str(passed_to_gpt)+"/"+str(len(todos)))
         
 def bug_type_by_diff(commits,src_prompt):
     lines = helper.readFile(src_prompt)
@@ -268,8 +268,6 @@ def bug_type_by_diff(commits,src_prompt):
     for commit in cveeval_commits:
         if commit in result.keys():
             continue
-
-        print(commit)
         prompt = ""
         prompt += fix_prompt
         diff_3lines = helper.get_diff(linux_dir,commit)
@@ -283,7 +281,7 @@ def bug_type_by_diff(commits,src_prompt):
             passed_to_gpt += 1
             message = [{"role": "user", "content": prompt},]#{"role": "user", "content": "do the commit title and message contain the indications or implications of a security bug? please answer in the format of \"yes\" or \"no\"."}
             res = gpt4(message,0.7)
-            print(res)
+            #print(res)
             result[commit] = res
             if "Bug type: " in res:
                 bug_type = res.split("Bug type: ")[1].split("\n")[0]
@@ -294,7 +292,7 @@ def bug_type_by_diff(commits,src_prompt):
                 correct += 1
         helper.del_file_if_exists(out_file)
         helper.dump(out_file, str(result))
-        print("correct/passed_to_gpt/total: "+str(correct)+"/"+str(passed_to_gpt)+"/"+str(total))
+        #print("correct/passed_to_gpt/total: "+str(correct)+"/"+str(passed_to_gpt)+"/"+str(total))
 
 def type2int(bug_type):
     bug_type = bug_type.replace("\"", "").replace(".","").lower()
@@ -347,7 +345,7 @@ def bug_type_by_whole_patch(out_file,commits):
     for commit, types in commits.items():
         if commit in result.keys():
             continue
-        print(commit)
+        #print(commit)
 
         prompt = ""
         prompt += fix_prompt
@@ -394,7 +392,7 @@ Please reply in the below json format; for example:
                     count += 1
             elif "\"bug type\": \"" in res:
                 if "\"bug type\": \""  +todo_commits[commit]+"\"" in res:
-                    print(commit)
+                    #print(commit)
                     count += 1
         print(count)
     else:
@@ -411,7 +409,7 @@ Please reply in the below json format; for example:
         if commit in result:
             continue
       
-        print(commit)
+        #print(commit)
         title_message = helper.get_commitMessage(repo_dir,commit,True)
         title = title_message[0].strip("\n").strip()
         message = [x.strip("\n").strip() for x in title_message[1:]]
@@ -429,7 +427,7 @@ Please reply in the below json format; for example:
         prompt += "\n"+"Commit diff:\n"+"".join(diff_3lines)
         prompt_len = num_tokens_from_prompt(prompt)
         print("{}, prompt length: {}".format(commit, prompt_len))
-        print("commit: "+commit+"\nprompt: "+prompt)
+        #print("commit: "+commit+"\nprompt: "+prompt)
         if prompt_len+512 > 128000:
             result[commit] = "TOO LONG(>128,000)"
         else:
@@ -446,7 +444,7 @@ Please reply in the below json format; for example:
             # res = gpt_model(model,message,tempature)
             if "\"bug type\":\""+todo_commits[commit]+"\"" in res:
                 correct += 1
-            print(res)
+            #print(res)
             print("correct/total: "+str(correct)+"/"+str(total))
             result[commit] = res
         helper.del_file_if_exists(out_file)
@@ -681,7 +679,7 @@ def bug_type_by_whole_patch_o1(groundtruth):
         tempature=1.0
         response = gpt_model_o1(model,message)
         result1[commit] = response
-        print(response)
+        #print(response)
         prompt = """
 I will give you a response about if a patch contains reliable hints about the bug type. You are tasked with undertanding the response and conclude it in a json format; for example:
 {
@@ -749,7 +747,7 @@ def is_reliable_llama(step1_out_file,step2_out_file):
         prompt += "\n"+"Commit diff:\n"+"".join(diff_3lines)
         prompt_len = num_tokens_from_prompt(prompt)
         print("{}, prompt length: {}".format(commit, prompt_len))
-        print("commit: "+commit+"\nprompt: "+prompt)
+        #print("commit: "+commit+"\nprompt: "+prompt)
         if prompt_len+512 > 128000:
             result[commit] = "TOO LONG(>128,000)"
         else:
@@ -777,7 +775,7 @@ def is_reliable_llama(step1_out_file,step2_out_file):
                     time.sleep(sleep_time)
                 else:
                     retry = False
-            print(res)
+            #print(res)
             result[commit] = res
         helper.del_file_if_exists(step1_out_file)
         helper.dump(step1_out_file, str(result))
@@ -852,7 +850,7 @@ def is_reliable1(src_file,out_file,src_prompt):
             
             continue
         
-        print(commit)
+        #print(commit)
         title_message = helper.get_commitMessage(repo_dir,commit,True)
         title = title_message[0].strip("\n").strip()
         message = [x.strip("\n").strip() for x in title_message[1:]]
@@ -868,7 +866,7 @@ def is_reliable1(src_file,out_file,src_prompt):
         prompt += "\n"+"Commit diff:\n"+"".join(diff_3lines)
         prompt_len = num_tokens_from_prompt(prompt)
         print("{}, prompt length: {}".format(commit, prompt_len))
-        print("commit: "+commit+"\nprompt: "+prompt)
+        #print("commit: "+commit+"\nprompt: "+prompt)
         if prompt_len+512 > 128000:
             result[commit] = "TOO LONG(>128,000)"
         else:
@@ -883,7 +881,8 @@ def is_reliable1(src_file,out_file,src_prompt):
                 else:
                     retry = False
             # res = gpt_model(model,message,tempature)
-            print(res)
+            #print("commit: ", commit)
+            #print(res)
             result[commit] = res
         helper.del_file_if_exists(out_file)
         helper.dump(out_file, str(result))
@@ -928,6 +927,7 @@ The given response is as follows:
                 time.sleep(sleep_time)
             else:
                 retry = False
+        print("commit: ", commit)
         print(res)
         result[commit] = [response,res]
         helper.del_file_if_exists(out_file)
@@ -1052,7 +1052,7 @@ def is_reliable1(todo_commits,out_file,):
         prompt += "\n"+"Commit diff:\n"+"".join(diff_3lines)
         prompt_len = num_tokens_from_prompt(prompt)
         print("{}, prompt length: {}".format(commit, prompt_len))
-        print("commit: "+commit+"\nprompt: "+prompt)
+        #print("commit: "+commit+"\nprompt: "+prompt)
         if prompt_len+512 > 128000:
             result[commit] = "TOO LONG(>128,000)"
         else:
@@ -1067,7 +1067,8 @@ def is_reliable1(todo_commits,out_file,):
                 else:
                     retry = False
             # res = gpt_model(model,message,tempature)
-            print(res)
+            #print("commit: ", commit)
+            #print(res)
             result[commit] = res
         helper.del_file_if_exists(out_file)
         helper.dump(out_file, str(result))

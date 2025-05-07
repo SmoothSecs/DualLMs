@@ -26,9 +26,10 @@ def main():
     # Get the results from the LLM query
     not_reliable, out_str = get_results.parse_llm_results(args.out_file2)
     
-    print("*not_reliable*") # the commits that are not reliable to determine if it is a security patch.
+    print("*not_reliable*") # the commits that are not reliable to determine its bug type.
     print(not_reliable)
-    print("out_str")
+    
+    print("*reliable*") # the commits that are reliable to determine its bug type.
     print(out_str)
     
     # Write not_reliable to the specified file

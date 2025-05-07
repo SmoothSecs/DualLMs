@@ -29,4 +29,4 @@ python  bert_res.py \
 --batch_size 128 \
 --max_example -1 \
 --num_classes $NUM_CLASSES \
---output ${HOME_DIR}/data/results/${res_file}.txt 
+--output ${HOME_DIR}/data/results/${res_file}.txt > /dev/null 2>&1
